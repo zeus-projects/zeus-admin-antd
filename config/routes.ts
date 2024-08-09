@@ -10,7 +10,8 @@
  * @param icon 配置路由的图标，取值参考 https://ant.design/components/icon-cn， 注意去除风格后缀和大小写，如想要配置图标为 <StepBackwardOutlined /> 则取值应为 stepBackward 或 StepBackward，如想要配置图标为 <UserOutlined /> 则取值应为 user 或者 User
  * @doc https://umijs.org/docs/guides/routes
  */
-export default [
+
+const defaultRoutes = [
   {
     path: '/user',
     layout: false,
@@ -29,29 +30,6 @@ export default [
     component: './Welcome',
   },
   {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
-    routes: [
-      {
-        path: '/admin',
-        redirect: '/admin/sub-page',
-      },
-      {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        component: './Admin',
-      },
-    ],
-  },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
-  },
-  {
     path: '/',
     redirect: '/welcome',
   },
@@ -60,4 +38,50 @@ export default [
     layout: false,
     component: './404',
   },
+];
+
+const SystemManageRoutes = [
+  {
+    name: 'list.table-list',
+    icon: 'table',
+    path: '/list',
+    component: './TableList',
+  },
+  {
+    path: '/system',
+    name: 'system',
+    icon: 'setting',
+    routes: [
+      {
+        path: '/system',
+        redirect: '/system/dept',
+      },
+      {
+        path: '/system/dept',
+        name: 'dept',
+        component: './System/Dept',
+      },
+      {
+        path: '/system/menu',
+        name: 'menu',
+        component: './System/Menu',
+      },
+      {
+        path: '/system/role',
+        name: 'role',
+        component: './System/Role',
+      },
+      {
+        path: '/system/user',
+        name: 'user',
+        component: './System/User',
+      },
+    ],
+  },
+]
+
+
+export default [
+  ...defaultRoutes,
+  ...SystemManageRoutes
 ];
