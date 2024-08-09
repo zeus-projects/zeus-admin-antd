@@ -98,4 +98,11 @@ declare namespace API {
     description?: string;
     type?: NoticeIconItemType;
   };
+
+  type DeptListItem = {
+    id: number;
+    name: string;
+    parentId: number;
+    status: number;
+  };
 }
