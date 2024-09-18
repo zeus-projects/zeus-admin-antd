@@ -10,7 +10,6 @@ import {
   ProFormInstance,
   ProFormSelect,
   ProFormText,
-  ProFormTextArea,
   ProTable,
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl } from '@umijs/max';
@@ -50,33 +49,25 @@ const Table: React.FC = () => {
       hideInForm: true,
       valueEnum: {
         0: {
-          text: (
-            <FormattedMessage
-              id="common.status.normal"
-            />
-          ),
+          text: <FormattedMessage id="common.status.normal" />,
           status: 'Success',
         },
         1: {
-          text: (
-            <FormattedMessage
-              id="common.status.disabled"
-            />
-          ),
+          text: <FormattedMessage id="common.status.disabled" />,
           status: 'Error',
-        }
-      }
+        },
+      },
     },
   ];
 
   const handleAdd = async (formData: API.DeptListItem) => {
     const hide = messageApi.loading('loading...');
     if (formData) {
-      await addDept(formData)
+      await addDept(formData);
       hide();
       messageApi.success('Added successfully');
       if (formRef.current) {
-        formRef.current?.resetFields()
+        formRef.current?.resetFields();
       }
       setAddModalOpen(false);
       if (actionRef.current) {
@@ -85,7 +76,7 @@ const Table: React.FC = () => {
     } else {
       messageApi.error('Adding failed, please try again!');
     }
-  }
+  };
 
   return (
     <PageContainer>
@@ -93,7 +84,7 @@ const Table: React.FC = () => {
       <ProTable<API.DeptListItem>
         headerTitle={intl.formatMessage({
           id: 'pages.system.dept.title',
-          defaultMessage: '部门列表'
+          defaultMessage: '部门列表',
         })}
         rowKey="key"
         actionRef={actionRef}
@@ -119,13 +110,13 @@ const Table: React.FC = () => {
         formRef={formRef}
         title={intl.formatMessage({
           id: 'pages.system.dept.action.add',
-          defaultMessage: "Add Dept"
+          defaultMessage: 'Add Dept',
         })}
         width="400px"
         open={isAddModalOpen}
         onOpenChange={setAddModalOpen}
         onFinish={async (formData) => {
-          await handleAdd(formData as API.DeptListItem)
+          await handleAdd(formData as API.DeptListItem);
         }}
       >
         <ProFormText
@@ -133,7 +124,7 @@ const Table: React.FC = () => {
           name="name"
           label={intl.formatMessage({
             id: 'pages.system.dept.column.name',
-            defaultMessage: "Name"
+            defaultMessage: 'Name',
           })}
           rules={[
             {
@@ -152,17 +143,17 @@ const Table: React.FC = () => {
           name="status"
           label={intl.formatMessage({
             id: 'pages.system.dept.column.status',
-            defaultMessage: "Status"
+            defaultMessage: 'Status',
           })}
           options={[
             {
               value: 0,
-              label: "正常"
+              label: '正常',
             },
             {
               value: 1,
-              label: "禁用"
-            }
+              label: '禁用',
+            },
           ]}
         />
       </ModalForm>
