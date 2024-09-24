@@ -112,4 +112,9 @@ declare namespace API {
     parentId: number;
     status: number;
   };
+
+  type RoleListItem = {
+    id: number;
+    name: string;
+  };
 }

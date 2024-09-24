@@ -33,3 +33,32 @@ export async function addMenu(options?: { [key: string]: any }) {
     },
   });
 }
+
+export async function fetchRolePage(
+  params: {
+    // query
+    /** 当前的页码 */
+    current?: number;
+    /** 页面的容量 */
+    pageSize?: number;
+  },
+  options?: { [key: string]: any },
+) {
+  return request<API.MenuListItem>('/api/system/role/page', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
+export async function addRole(options?: { [key: string]: any }) {
+  return request<API.MenuListItem>('/api/system/role', {
+    method: 'POST',
+    data: {
+      method: 'post',
+      ...(options || {}),
+    },
+  });
+}

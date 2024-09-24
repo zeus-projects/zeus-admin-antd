@@ -60,7 +60,7 @@ const Table: React.FC = () => {
     },
   ];
 
-  const handleAdd = async (formData: API.DeptListItem) => {
+  const handleAdd = async (formData: API.MenuListItem) => {
     const hide = messageApi.loading('loading...');
     if (formData) {
       await addMenu(formData);
@@ -79,12 +79,7 @@ const Table: React.FC = () => {
   };
 
   return (
-    <PageContainer
-      content={intl.formatMessage({
-        id: 'pages.system.menu.title',
-        defaultMessage: 'This page can only be viewed by admin',
-      })}
-    >
+    <PageContainer>
       {contextHolder}
       <ProTable<API.MenuListItem>
         headerTitle={intl.formatMessage({
@@ -121,7 +116,7 @@ const Table: React.FC = () => {
         open={isAddModalOpen}
         onOpenChange={setAddModalOpen}
         onFinish={async (formData) => {
-          await handleAdd(formData as API.DeptListItem);
+          await handleAdd(formData as API.MenuListItem);
         }}
       >
         <ProFormText
@@ -172,7 +167,7 @@ const Table: React.FC = () => {
         closable={false}
       >
         {currentRow?.name && (
-          <ProDescriptions<API.DeptListItem>
+          <ProDescriptions<API.MenuListItem>
             column={2}
             title={currentRow?.name}
             request={async () => ({
@@ -181,7 +176,7 @@ const Table: React.FC = () => {
             params={{
               id: currentRow?.name,
             }}
-            columns={columns as ProDescriptionsItemProps<API.DeptListItem>[]}
+            columns={columns as ProDescriptionsItemProps<API.MenuListItem>[]}
           />
         )}
       </Drawer>

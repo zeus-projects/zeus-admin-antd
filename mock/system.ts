@@ -44,9 +44,43 @@ async function addMenu(req: Request, res: Response) {
   }, 1000);
 }
 
+async function fetchRolePage(req: Request, res: Response) {
+  const data: API.DeptListItem[] = [];
+  for (let i = 0; i < 100; i++) {
+    data.push({
+      id: i,
+      name: `这一第${i + 1}个角色`,
+      status: i % 2 === 0 ? 0 : 1,
+      parentId: 0,
+    });
+  }
+  const { current = 1, pageSize = 10 } = req.query;
+  let dataSource = [...data].slice(
+    ((current as number) - 1) * (pageSize as number),
+    (current as number) * (pageSize as number),
+  );
+  const result = {
+    data: dataSource,
+    total: 100,
+    success: true,
+    pageSize: parseInt(`${pageSize}`, 10) || 10,
+    current: parseInt(`${current}`, 10) || 1,
+  };
+
+  return res.json(result);
+}
+
+async function addRole(req: Request, res: Response) {
+  setTimeout(() => {
+    res.send({ data: {}, success: true });
+  }, 1000);
+}
+
 export default {
   'GET /api/system/dept/list': fetchDeptList,
   'POST /api/system/dept': addDept,
   'GET /api/system/menu/list': fetchMenuList,
   'POST /api/system/menu': addMenu,
+  'GET /api/system/role/page': fetchRolePage,
+  'POST /api/system/role': addRole,
 };

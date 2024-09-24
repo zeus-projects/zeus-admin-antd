@@ -10,5 +10,8 @@ export default {
   'pages.system.menu.status': '菜单状态',
   'pages.system.menu.action.add': '新增菜单',
   'pages.system.role.title': '角色管理',
+  'pages.system.role.name': '角色名称',
+  'pages.system.role.status': '角色状态',
+  'pages.system.role.action.add': '新增角色',
   'pages.system.user.title': '用户管理',
 };
