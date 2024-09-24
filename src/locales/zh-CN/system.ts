@@ -6,6 +6,9 @@ export default {
   'pages.system.dept.action.edit': '编辑部门',
   'pages.system.dept.action.delete': '删除部门',
   'pages.system.menu.title': '菜单管理',
+  'pages.system.menu.name': '菜单名称',
+  'pages.system.menu.status': '菜单状态',
+  'pages.system.menu.action.add': '新增菜单',
   'pages.system.role.title': '角色管理',
-  'pages.system.user.title': '用户管理'
-}
+  'pages.system.user.title': '用户管理',
+};

@@ -105,4 +105,11 @@ declare namespace API {
     parentId: number;
     status: number;
   };
+
+  type MenuListItem = {
+    id: number;
+    name: string;
+    parentId: number;
+    status: number;
+  };
 }
