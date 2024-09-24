@@ -14,4 +14,12 @@ export default {
   'pages.system.role.status': 'Role Status',
   'pages.system.role.action.add': 'Add Role',
   'pages.system.user.title': 'User',
+  'pages.system.user.username': 'Username',
+  'pages.system.user.fullname': 'Fullname',
+  'pages.system.user.nickname': 'Nickname',
+  'pages.system.user.gender': 'Gender',
+  'pages.system.user.phone': 'Phone',
+  'pages.system.user.status': 'Status',
+  'pages.system.user.action.add': 'Add User',
+  'pages.system.user.tip.phone': 'Phone must be unique',
 };

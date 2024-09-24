@@ -10,4 +10,6 @@ export default {
   'common.action.batchDelete': '批量删除',
   'common.action.detail': '查看',
   'common.action.search': '搜索',
+  'common.dict.gender.male': '男',
+  'common.dict.gender.female': '女',
 };

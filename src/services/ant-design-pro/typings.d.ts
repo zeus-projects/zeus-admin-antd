@@ -116,5 +116,17 @@ declare namespace API {
   type RoleListItem = {
     id: number;
     name: string;
+    status: number;
+  };
+
+  type UserListItem = {
+    id: number;
+    username: string;
+    fullname: string;
+    nickname?: string;
+    gender: number;
+    email?: string;
+    phone: string;
+    status: number;
   };
 }

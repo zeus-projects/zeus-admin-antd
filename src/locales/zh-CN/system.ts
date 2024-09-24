@@ -14,4 +14,12 @@ export default {
   'pages.system.role.status': '角色状态',
   'pages.system.role.action.add': '新增角色',
   'pages.system.user.title': '用户管理',
+  'pages.system.user.username': '登录用户名',
+  'pages.system.user.fullname': '真实姓名',
+  'pages.system.user.nickname': '帐号昵称',
+  'pages.system.user.gender': '性别',
+  'pages.system.user.phone': '电话号码',
+  'pages.system.user.status': '帐号状态',
+  'pages.system.user.action.add': '新增用户',
+  'pages.system.user.tip.phone': '手机号码必须唯一',
 };

@@ -10,4 +10,6 @@ export default {
   'common.action.batchDelete': 'Batch Delete',
   'common.action.detail': 'Detail',
   'common.action.search': 'Search',
+  'common.dict.gender.male': 'Male',
+  'common.dict.gender.female': 'Female',
 };
