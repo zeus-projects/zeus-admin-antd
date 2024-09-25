@@ -4,4 +4,5 @@
 # Export Git hook params
 export GIT_PARAMS=$*
 
-npx --no-install fabric verify-commit
+# npx --no-install lint-staged
+node_modules/.bin/fabric verify-commit
