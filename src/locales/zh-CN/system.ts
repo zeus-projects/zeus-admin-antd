@@ -22,4 +22,10 @@ export default {
   'pages.system.user.status': '帐号状态',
   'pages.system.user.action.add': '新增用户',
   'pages.system.user.tip.phone': '手机号码必须唯一',
+  'pages.system.dict.title': '字典管理',
+  'pages.system.dict.key': '字典KEY',
+  'pages.system.dict.key.tooltip': '字典KEY必须全局唯一,建议遵循[模块]_[业务]_[名称]的规则',
+  'pages.system.dict.name': '字典名称',
+  'pages.system.dict.name.tooltip': '字典名称不能为空',
+  'pages.system.dict.action.add': '新增字典',
 };

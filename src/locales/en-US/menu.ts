@@ -50,7 +50,9 @@ export default {
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',
   'menu.system': 'System',
-  'menu.system.dept': 'Dept',
-  'menu.system.role': 'Role',
   'menu.system.user': 'User',
+  'menu.system.role': 'Role',
+  'menu.system.menu': 'Menu',
+  'menu.system.dept': 'Dept',
+  'menu.system.dict': 'Dict',
 };

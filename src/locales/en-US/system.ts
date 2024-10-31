@@ -22,4 +22,10 @@ export default {
   'pages.system.user.status': 'Status',
   'pages.system.user.action.add': 'Add User',
   'pages.system.user.tip.phone': 'Phone must be unique',
+  'pages.system.dict.title': 'Dict',
+  'pages.system.dict.key': 'Dict Key',
+  'pages.system.dict.key.tooltip': 'Dict key need be unique',
+  'pages.system.dict.name': 'Dict name',
+  'pages.system.dict.name.tooltip': 'Dict name cannot be blank',
+  'pages.system.dict.action.add': 'Add Dict',
 };

@@ -42,29 +42,18 @@ const defaultRoutes = [
 
 const SystemManageRoutes = [
   {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
-  },
-  {
     path: '/system',
     name: 'system',
     icon: 'setting',
     routes: [
       {
         path: '/system',
-        redirect: '/system/dept',
+        redirect: '/system/User',
       },
       {
-        path: '/system/dept',
-        name: 'dept',
-        component: './System/Dept',
-      },
-      {
-        path: '/system/menu',
-        name: 'menu',
-        component: './System/Menu',
+        path: '/system/user',
+        name: 'user',
+        component: './System/User',
       },
       {
         path: '/system/role',
@@ -72,16 +61,28 @@ const SystemManageRoutes = [
         component: './System/Role',
       },
       {
-        path: '/system/user',
-        name: 'user',
-        component: './System/User',
+        path: '/system/menu',
+        name: 'menu',
+        component: './System/Menu',
+      },
+      {
+        path: '/system/dept',
+        name: 'dept',
+        component: './System/Dept',
+      },
+      {
+        path: '/system/dict',
+        name: 'dict',
+        component: './System/Dict',
       },
     ],
   },
-]
-
-
-export default [
-  ...defaultRoutes,
-  ...SystemManageRoutes
+  {
+    name: 'list.table-list',
+    icon: 'table',
+    path: '/list',
+    component: './TableList',
+  },
 ];
+
+export default [...defaultRoutes, ...SystemManageRoutes];
