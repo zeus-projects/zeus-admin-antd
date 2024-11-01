@@ -1,4 +1,4 @@
-import { addDict, fetchDictPage } from '@/services/ant-design-pro/system';
+import { addDictItem, fetchDictItemPage } from '@/services/ant-design-pro/system';
 import { PlusOutlined } from '@ant-design/icons';
 import {
   ActionType,
@@ -14,24 +14,25 @@ import {
 import { FormattedMessage, useIntl } from '@umijs/max';
 import { Button, Drawer, message } from 'antd';
 import React, { useRef, useState } from 'react';
-// import UpdateForm from './components/UpdateForm';
 
 const Table: React.FC = () => {
   const intl = useIntl();
   const [messageApi, contextHolder] = message.useMessage();
   const actionRef = useRef<ActionType>();
   const formRef = useRef<ProFormInstance>();
-  const [currentRow, setCurrentRow] = useState<API.DictListItem>();
+  const [currentRow, setCurrentRow] = useState<API.DictItemListItem>();
   const [showDetail, setShowDetail] = useState<boolean>(false);
   const [isAddModalOpen, setAddModalOpen] = useState<boolean>(false);
 
-  const columns: ProColumns<API.DictListItem>[] = [
+  const columns: ProColumns<API.DictItemListItem>[] = [
     {
       title: <FormattedMessage id="pages.system.dict.key" defaultMessage="Dict Key" />,
       dataIndex: 'key',
-      tooltip: <FormattedMessage id="pages.system.dict.key.tooltip" />,
+      hideInForm: true,
       render: (dom, entity) => {
-        return (
+        return showDetail ? (
+          <div>{dom}</div>
+        ) : (
           <a
             onClick={() => {
               setCurrentRow(entity);
@@ -44,32 +45,19 @@ const Table: React.FC = () => {
       },
     },
     {
-      title: <FormattedMessage id="pages.system.dict.name" />,
-      dataIndex: 'name',
-      tooltip: intl.formatMessage({ id: 'pages.system.dict.name.tooltip' }),
+      title: <FormattedMessage id="pages.system.dict.item.label" />,
+      dataIndex: 'label',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="Operating" />,
-      dataIndex: 'option',
-      valueType: 'option',
-      width: 200,
-      // render: () => {
-      //   return (
-      //     <Link to={`/system/dict/item`}>
-      //       <Button type="primary">
-      //         <SettingOutlined />
-      //         <FormattedMessage id="pages.system.dict.action.item" />
-      //       </Button>
-      //     </Link>
-      //   );
-      // },
+      title: <FormattedMessage id="pages.system.dict.item.value" />,
+      dataIndex: 'value',
     },
   ];
 
-  const handleAdd = async (formData: API.DictListItem) => {
+  const handleAdd = async (formData: API.DictItemListItem) => {
     const hide = messageApi.loading('loading...');
     if (formData) {
-      await addDict(formData);
+      await addDictItem(formData);
       hide();
       messageApi.success('Added successfully');
       if (formRef.current) {
@@ -87,8 +75,8 @@ const Table: React.FC = () => {
   return (
     <PageContainer>
       {contextHolder}
-      <ProTable<API.DictListItem>
-        headerTitle={intl.formatMessage({ id: 'pages.system.dict.title' })}
+      <ProTable<API.DictItemListItem>
+        headerTitle={intl.formatMessage({ id: 'pages.system.dict.item.title' })}
         rowKey="key"
         actionRef={actionRef}
         search={{
@@ -103,11 +91,11 @@ const Table: React.FC = () => {
             }}
           >
             <PlusOutlined />
-            <FormattedMessage id="pages.system.dict.action.add" defaultMessage="New" />
+            <FormattedMessage id="pages.system.dict.item.action.add" defaultMessage="New" />
           </Button>,
         ]}
         columns={columns}
-        request={fetchDictPage}
+        request={fetchDictItemPage}
         pagination={{
           defaultPageSize: 10,
         }}
@@ -115,22 +103,22 @@ const Table: React.FC = () => {
       <ModalForm
         formRef={formRef}
         title={intl.formatMessage({
-          id: 'pages.system.dict.action.add',
-          defaultMessage: 'Add Dict',
+          id: 'pages.system.dict.item.action.add',
+          defaultMessage: 'Add Dict Item',
         })}
         width="400px"
         open={isAddModalOpen}
         onOpenChange={setAddModalOpen}
         onFinish={async (formData) => {
-          await handleAdd(formData as API.DictListItem);
+          await handleAdd(formData as API.DictItemListItem);
         }}
       >
         <ProFormText
           width="md"
-          name="key"
+          name="label"
           label={intl.formatMessage({
-            id: 'pages.system.dict.key',
-            defaultMessage: 'Key',
+            id: 'pages.system.dict.item.label',
+            defaultMessage: 'Label',
           })}
           rules={[
             {
@@ -138,7 +126,7 @@ const Table: React.FC = () => {
               message: (
                 <FormattedMessage
                   id="pages.searchTable.ruleName"
-                  defaultMessage="Rule key is required"
+                  defaultMessage="Rule label is required"
                 />
               ),
             },
@@ -146,10 +134,10 @@ const Table: React.FC = () => {
         />
         <ProFormText
           width="md"
-          name="name"
+          name="value"
           label={intl.formatMessage({
-            id: 'pages.system.dict.name',
-            defaultMessage: 'Name',
+            id: 'pages.system.dict.item.value',
+            defaultMessage: 'Value',
           })}
           rules={[
             {
@@ -157,7 +145,7 @@ const Table: React.FC = () => {
               message: (
                 <FormattedMessage
                   id="pages.searchTable.ruleName"
-                  defaultMessage="Rule name is required"
+                  defaultMessage="Rule value is required"
                 />
               ),
             },
@@ -165,7 +153,7 @@ const Table: React.FC = () => {
         />
       </ModalForm>
       <Drawer
-        width={600}
+        width={400}
         open={showDetail}
         onClose={() => {
           setCurrentRow(undefined);
@@ -173,17 +161,17 @@ const Table: React.FC = () => {
         }}
         closable={false}
       >
-        {currentRow?.name && (
-          <ProDescriptions<API.DictListItem>
-            column={2}
-            title={currentRow?.name}
+        {currentRow?.value && (
+          <ProDescriptions<API.DictItemListItem>
+            column={1}
+            title={currentRow?.label}
             request={async () => ({
               data: currentRow || {},
             })}
             params={{
-              id: currentRow?.name,
+              id: currentRow?.value,
             }}
-            columns={columns as ProDescriptionsItemProps<API.DictListItem>[]}
+            columns={columns as ProDescriptionsItemProps<API.DictItemListItem>[]}
           />
         )}
       </Drawer>

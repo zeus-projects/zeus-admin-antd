@@ -75,6 +75,12 @@ const SystemManageRoutes = [
         name: 'dict',
         component: './System/Dict',
       },
+      {
+        path: '/system/dict/item',
+        name: 'dictItem',
+        component: './System/Dict/Item',
+        hideInMenu: true,
+      },
     ],
   },
   {

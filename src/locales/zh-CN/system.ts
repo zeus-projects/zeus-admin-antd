@@ -28,4 +28,9 @@ export default {
   'pages.system.dict.name': '字典名称',
   'pages.system.dict.name.tooltip': '字典名称不能为空',
   'pages.system.dict.action.add': '新增字典',
+  'pages.system.dict.action.item': '字典项',
+  'pages.system.dict.item.title': '字典项管理',
+  'pages.system.dict.item.value': '字典项值',
+  'pages.system.dict.item.label': '字典项名称',
+  'pages.system.dict.item.action.add': '新增字典项',
 };

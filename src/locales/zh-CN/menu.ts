@@ -55,4 +55,5 @@ export default {
   'menu.system.menu': '菜单管理',
   'menu.system.dept': '部门管理',
   'menu.system.dict': '字典管理',
+  'menu.system.dictItem': '字典项管理',
 };

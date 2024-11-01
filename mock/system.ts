@@ -112,10 +112,10 @@ async function addUser(req: Request, res: Response) {
 
 async function fetchDictPage(req: Request, res: Response) {
   const data: API.DictListItem[] = [];
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 5; i++) {
     data.push({
-      key: `KEY${i}`,
-      name: `字典${i}`,
+      key: `字典-KEY-${i}`,
+      name: `字典名称-${i}`,
     });
   }
   const { current = 1, pageSize = 10 } = req.query;
@@ -125,7 +125,7 @@ async function fetchDictPage(req: Request, res: Response) {
   );
   const result = {
     data: dataSource,
-    total: 100,
+    total: 5,
     success: true,
     pageSize: parseInt(`${pageSize}`, 10) || 10,
     current: parseInt(`${current}`, 10) || 1,
@@ -134,6 +134,37 @@ async function fetchDictPage(req: Request, res: Response) {
 }
 
 async function addDict(req: Request, res: Response) {
+  setTimeout(() => {
+    res.send({ data: {}, success: true });
+  }, 1000);
+}
+
+async function fetchDictItemPage(req: Request, res: Response) {
+  const data: API.DictItemListItem[] = [];
+  const dataSize = Math.ceil(Math.random() * 5);
+  for (let i = 0; i < dataSize; i++) {
+    data.push({
+      key: `Option-${i}`,
+      label: `选项${i}`,
+      value: `${i}`,
+    });
+  }
+  const { current = 1, pageSize = 10 } = req.query;
+  let dataSource = [...data].slice(
+    ((current as number) - 1) * (pageSize as number),
+    (current as number) * (pageSize as number),
+  );
+  const result = {
+    data: dataSource,
+    total: dataSize,
+    success: true,
+    pageSize: parseInt(`${pageSize}`, 10) || 10,
+    current: parseInt(`${current}`, 10) || 1,
+  };
+  return res.json(result);
+}
+
+async function addDictItem(req: Request, res: Response) {
   setTimeout(() => {
     res.send({ data: {}, success: true });
   }, 1000);
@@ -150,4 +181,6 @@ export default {
   'POST /api/system/user': addUser,
   'GET /api/system/dict/page': fetchDictPage,
   'POST /api/system/dict': addDict,
+  'GET /api/system/dict/item/page': fetchDictItemPage,
+  'POST /api/system/dict/item': addDictItem,
 };

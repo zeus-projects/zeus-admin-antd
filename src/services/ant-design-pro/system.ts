@@ -117,3 +117,29 @@ export async function addDict(options?: { [key: string]: any }) {
     },
   });
 }
+
+export async function fetchDictItemPage(
+  params: {
+    current?: number;
+    pageSize?: number;
+  },
+  options?: { [key: string]: any },
+) {
+  return request<API.DictItemListItem>('/api/system/dict/item/page', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
+export async function addDictItem(options?: { [key: string]: any }) {
+  return request<API.DictItemListItem>('/api/system/dict/item', {
+    method: 'POST',
+    data: {
+      method: 'post',
+      ...(options || {}),
+    },
+  });
+}

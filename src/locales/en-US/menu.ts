@@ -55,4 +55,5 @@ export default {
   'menu.system.menu': 'Menu',
   'menu.system.dept': 'Dept',
   'menu.system.dict': 'Dict',
+  'menu.system.dictItem': 'Dict Item',
 };

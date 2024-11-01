@@ -28,4 +28,9 @@ export default {
   'pages.system.dict.name': 'Dict name',
   'pages.system.dict.name.tooltip': 'Dict name cannot be blank',
   'pages.system.dict.action.add': 'Add Dict',
+  'pages.system.dict.action.item': 'Dict Item',
+  'pages.system.dict.item.title': 'Dict Item',
+  'pages.system.dict.item.value': 'DictItem Value',
+  'pages.system.dict.item.label': 'DictItem Label',
+  'pages.system.dict.item.action.add': 'Add Dict Item',
 };
