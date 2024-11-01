@@ -91,3 +91,29 @@ export async function addUser(options?: { [key: string]: any }) {
     },
   });
 }
+
+export async function fetchDictPage(
+  params: {
+    current?: number;
+    pageSize?: number;
+  },
+  options?: { [key: string]: any },
+) {
+  return request<API.DictListItem>('/api/system/dict/page', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
+export async function addDict(options?: { [key: string]: any }) {
+  return request<API.DictListItem>('/api/system/dict', {
+    method: 'POST',
+    data: {
+      method: 'post',
+      ...(options || {}),
+    },
+  });
+}

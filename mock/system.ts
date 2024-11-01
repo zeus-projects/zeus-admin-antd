@@ -110,6 +110,35 @@ async function addUser(req: Request, res: Response) {
   }, 1000);
 }
 
+async function fetchDictPage(req: Request, res: Response) {
+  const data: API.DictListItem[] = [];
+  for (let i = 0; i < 100; i++) {
+    data.push({
+      key: `KEY${i}`,
+      name: `字典${i}`,
+    });
+  }
+  const { current = 1, pageSize = 10 } = req.query;
+  let dataSource = [...data].slice(
+    ((current as number) - 1) * (pageSize as number),
+    (current as number) * (pageSize as number),
+  );
+  const result = {
+    data: dataSource,
+    total: 100,
+    success: true,
+    pageSize: parseInt(`${pageSize}`, 10) || 10,
+    current: parseInt(`${current}`, 10) || 1,
+  };
+  return res.json(result);
+}
+
+async function addDict(req: Request, res: Response) {
+  setTimeout(() => {
+    res.send({ data: {}, success: true });
+  }, 1000);
+}
+
 export default {
   'GET /api/system/dept/list': fetchDeptList,
   'POST /api/system/dept': addDept,
@@ -119,4 +148,6 @@ export default {
   'POST /api/system/role': addRole,
   'GET /api/system/user/page': fetchUserPage,
   'POST /api/system/user': addUser,
+  'GET /api/system/dict/page': fetchDictPage,
+  'POST /api/system/dict': addDict,
 };

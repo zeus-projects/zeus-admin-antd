@@ -1,4 +1,4 @@
-import { addUser, fetchUserPage } from '@/services/ant-design-pro/system';
+import { addDict, fetchDictPage } from '@/services/ant-design-pro/system';
 import { PlusOutlined } from '@ant-design/icons';
 import {
   ActionType,
@@ -8,7 +8,6 @@ import {
   ProDescriptions,
   ProDescriptionsItemProps,
   ProFormInstance,
-  ProFormSelect,
   ProFormText,
   ProTable,
 } from '@ant-design/pro-components';
@@ -21,11 +20,11 @@ const Table: React.FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const actionRef = useRef<ActionType>();
   const formRef = useRef<ProFormInstance>();
-  const [currentRow, setCurrentRow] = useState<API.UserListItem>();
+  const [currentRow, setCurrentRow] = useState<API.DictListItem>();
   const [showDetail, setShowDetail] = useState<boolean>(false);
   const [isAddModalOpen, setAddModalOpen] = useState<boolean>(false);
 
-  const columns: ProColumns<API.UserListItem>[] = [
+  const columns: ProColumns<API.DictListItem>[] = [
     {
       title: <FormattedMessage id="pages.system.dict.key" defaultMessage="Dict Key" />,
       dataIndex: 'key',
@@ -50,10 +49,10 @@ const Table: React.FC = () => {
     },
   ];
 
-  const handleAdd = async (formData: API.UserListItem) => {
+  const handleAdd = async (formData: API.DictListItem) => {
     const hide = messageApi.loading('loading...');
     if (formData) {
-      await addUser(formData);
+      await addDict(formData);
       hide();
       messageApi.success('Added successfully');
       if (formRef.current) {
@@ -71,7 +70,7 @@ const Table: React.FC = () => {
   return (
     <PageContainer>
       {contextHolder}
-      <ProTable<API.UserListItem>
+      <ProTable<API.DictListItem>
         headerTitle={intl.formatMessage({ id: 'pages.system.dict.title' })}
         rowKey="key"
         actionRef={actionRef}
@@ -86,12 +85,12 @@ const Table: React.FC = () => {
               setAddModalOpen(true);
             }}
           >
-            <PlusOutlined />{' '}
+            <PlusOutlined />
             <FormattedMessage id="pages.system.dict.action.add" defaultMessage="New" />
           </Button>,
         ]}
         columns={columns}
-        request={fetchUserPage}
+        request={fetchDictPage}
         pagination={{
           defaultPageSize: 10,
         }}
@@ -99,21 +98,40 @@ const Table: React.FC = () => {
       <ModalForm
         formRef={formRef}
         title={intl.formatMessage({
-          id: 'pages.system.user.action.add',
-          defaultMessage: 'Add User',
+          id: 'pages.system.dict.action.add',
+          defaultMessage: 'Add Dict',
         })}
         width="400px"
         open={isAddModalOpen}
         onOpenChange={setAddModalOpen}
         onFinish={async (formData) => {
-          await handleAdd(formData as API.UserListItem);
+          await handleAdd(formData as API.DictListItem);
         }}
       >
         <ProFormText
           width="md"
+          name="key"
+          label={intl.formatMessage({
+            id: 'pages.system.dict.key',
+            defaultMessage: 'Key',
+          })}
+          rules={[
+            {
+              required: true,
+              message: (
+                <FormattedMessage
+                  id="pages.searchTable.ruleName"
+                  defaultMessage="Rule key is required"
+                />
+              ),
+            },
+          ]}
+        />
+        <ProFormText
+          width="md"
           name="name"
           label={intl.formatMessage({
-            id: 'pages.system.user.username',
+            id: 'pages.system.dict.name',
             defaultMessage: 'Name',
           })}
           rules={[
@@ -128,24 +146,6 @@ const Table: React.FC = () => {
             },
           ]}
         />
-        <ProFormSelect
-          width="md"
-          name="status"
-          label={intl.formatMessage({
-            id: 'pages.system.user.status',
-            defaultMessage: 'Status',
-          })}
-          options={[
-            {
-              value: 0,
-              label: '正常',
-            },
-            {
-              value: 1,
-              label: '禁用',
-            },
-          ]}
-        />
       </ModalForm>
       <Drawer
         width={600}
@@ -156,17 +156,17 @@ const Table: React.FC = () => {
         }}
         closable={false}
       >
-        {currentRow?.username && (
-          <ProDescriptions<API.UserListItem>
+        {currentRow?.name && (
+          <ProDescriptions<API.DictListItem>
             column={2}
-            title={currentRow?.username}
+            title={currentRow?.name}
             request={async () => ({
               data: currentRow || {},
             })}
             params={{
-              id: currentRow?.username,
+              id: currentRow?.name,
             }}
-            columns={columns as ProDescriptionsItemProps<API.UserListItem>[]}
+            columns={columns as ProDescriptionsItemProps<API.DictListItem>[]}
           />
         )}
       </Drawer>

@@ -13,7 +13,7 @@ import {
   ProTable,
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl } from '@umijs/max';
-import { Button, Drawer, message } from 'antd';
+import { Button, Drawer, message, Tag } from 'antd';
 import React, { useRef, useState } from 'react';
 
 const Table: React.FC = () => {
@@ -48,10 +48,18 @@ const Table: React.FC = () => {
       dataIndex: 'gender',
       valueEnum: {
         0: {
-          text: <FormattedMessage id="common.dict.gender.female" />,
+          text: (
+            <Tag color="green">
+              <FormattedMessage id="common.dict.gender.female" />
+            </Tag>
+          ),
         },
         1: {
-          text: <FormattedMessage id="common.dict.gender.male" />,
+          text: (
+            <Tag color="blue">
+              <FormattedMessage id="common.dict.gender.male" />
+            </Tag>
+          ),
         },
       },
     },
@@ -119,7 +127,7 @@ const Table: React.FC = () => {
               setAddModalOpen(true);
             }}
           >
-            <PlusOutlined />{' '}
+            <PlusOutlined />
             <FormattedMessage id="pages.system.user.action.add" defaultMessage="New" />
           </Button>,
         ]}

@@ -99,7 +99,7 @@ const Table: React.FC = () => {
               setAddModalOpen(true);
             }}
           >
-            <PlusOutlined />{' '}
+            <PlusOutlined />
             <FormattedMessage id="pages.system.dept.action.add" defaultMessage="New" />
           </Button>,
         ]}

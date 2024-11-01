@@ -129,4 +129,15 @@ declare namespace API {
     phone: string;
     status: number;
   };
+
+  type DictListItem = {
+    key: string;
+    name: string;
+  };
+
+  type DictItemListItem = {
+    key: string;
+    value: string;
+    label: string;
+  };
 }
