@@ -11,7 +11,7 @@ import {
   ProFormText,
   ProTable,
 } from '@ant-design/pro-components';
-import { FormattedMessage, useIntl } from '@umijs/max';
+import { FormattedMessage, Link, useIntl } from '@umijs/max';
 import { Button, Drawer, message } from 'antd';
 import React, { useRef, useState } from 'react';
 // import UpdateForm from './components/UpdateForm';
@@ -53,16 +53,15 @@ const Table: React.FC = () => {
       dataIndex: 'option',
       valueType: 'option',
       width: 200,
-      // render: () => {
-      //   return (
-      //     <Link to={`/system/dict/item`}>
-      //       <Button type="primary">
-      //         <SettingOutlined />
-      //         <FormattedMessage id="pages.system.dict.action.item" />
-      //       </Button>
-      //     </Link>
-      //   );
-      // },
+      render: () => {
+        return (
+          <Link to={`/system/dict/item`}>
+            <Button type="primary">
+              <FormattedMessage id="pages.system.dict.action.item" />
+            </Button>
+          </Link>
+        );
+      },
     },
   ];
 
