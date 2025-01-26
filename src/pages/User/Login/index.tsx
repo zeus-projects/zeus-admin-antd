@@ -15,12 +15,12 @@ import {
   ProFormCheckbox,
   ProFormText,
 } from '@ant-design/pro-components';
-import { FormattedMessage, history, SelectLang, useIntl, useModel, Helmet } from '@umijs/max';
+import { FormattedMessage, Helmet, history, SelectLang, useIntl, useModel } from '@umijs/max';
 import { Alert, message, Tabs } from 'antd';
-import Settings from '../../../../config/defaultSettings';
+import { createStyles } from 'antd-style';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
-import { createStyles } from 'antd-style';
+import Settings from '../../../../config/defaultSettings';
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -116,7 +116,32 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (values: API.LoginParams) => {
     try {
-      // 登录
+      // 密码登录
+      // const authRes = await passwordLogin({
+      //   grant_type: 'password',
+      //   username: values?.username,
+      //   password: values?.password
+      // })
+      // if (authRes && authRes.access_token) {
+      //   const defaultLoginSuccessMessage = intl.formatMessage({
+      //     id: 'pages.login.success',
+      //     defaultMessage: '登录成功！',
+      //   });
+      //   message.success(defaultLoginSuccessMessage);
+
+      //   await fetchUserInfo();
+      //   const urlParams = new URL(window.location.href).searchParams;
+      //   history.push(urlParams.get('redirect') || '/');
+      //   return;
+      // }
+      // console.log(authRes);
+      // const defaultLoginFailureMessage = intl.formatMessage({
+      //   id: 'pages.login.failure',
+      //   defaultMessage: '登录失败，请重试！',
+      // });
+      // message.error(defaultLoginFailureMessage)
+      // setUserLoginState(authRes);
+
       const msg = await login({ ...values, type });
       if (msg.status === 'ok') {
         const defaultLoginSuccessMessage = intl.formatMessage({

@@ -68,6 +68,17 @@ declare namespace API {
     type?: string;
   };
 
+  type AuthLoginParams = {
+    grant_type: string;
+    username?: string;
+    password?: string;
+  };
+
+  type AuthLoginResponse = {
+    access_token: string;
+    refresh_token: string;
+  };
+
   type ErrorResponse = {
     /** 业务约定的错误码 */
     errorCode: string;

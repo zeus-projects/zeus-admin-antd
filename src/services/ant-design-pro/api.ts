@@ -12,6 +12,14 @@ export async function currentUser(options?: { [key: string]: any }) {
   });
 }
 
+/** 获取当前的用户 GET /api/admin/user/currentUser */
+export async function getCurrentUser(options?: { [key: string]: any }) {
+  return request<{ data: API.CurrentUser }>('/api/admin/user/currentUser', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}
+
 /** 退出登录接口 POST /api/login/outLogin */
 export async function outLogin(options?: { [key: string]: any }) {
   return request<Record<string, any>>('/api/login/outLogin', {
@@ -28,6 +36,19 @@ export async function login(body: API.LoginParams, options?: { [key: string]: an
       'Content-Type': 'application/json',
     },
     data: body,
+    ...(options || {}),
+  });
+}
+
+/** 帐号密码登录接口 POST /api/auth/oauth2/token */
+export async function passwordLogin(data: API.AuthLoginParams, options?: { [key: string]: any }) {
+  return request<API.AuthLoginResponse>('/api/auth/oauth2/token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: 'Basic emV1czp6ZXVz',
+    },
+    params: data,
     ...(options || {}),
   });
 }
@@ -64,10 +85,10 @@ export async function rule(
 export async function updateRule(options?: { [key: string]: any }) {
   return request<API.RuleListItem>('/api/rule', {
     method: 'POST',
-    data:{
+    data: {
       method: 'update',
       ...(options || {}),
-    }
+    },
   });
 }
 
@@ -75,10 +96,10 @@ export async function updateRule(options?: { [key: string]: any }) {
 export async function addRule(options?: { [key: string]: any }) {
   return request<API.RuleListItem>('/api/rule', {
     method: 'POST',
-    data:{
+    data: {
       method: 'post',
       ...(options || {}),
-    }
+    },
   });
 }
 
@@ -86,9 +107,9 @@ export async function addRule(options?: { [key: string]: any }) {
 export async function removeRule(options?: { [key: string]: any }) {
   return request<Record<string, any>>('/api/rule', {
     method: 'POST',
-    data:{
+    data: {
       method: 'delete',
       ...(options || {}),
-    }
+    },
   });
 }
